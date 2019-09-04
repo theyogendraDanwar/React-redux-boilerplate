@@ -1,0 +1,1 @@
+export { default as simpleReducer } from './ducks/simpleReducer'
