@@ -8,6 +8,12 @@ const initialState = {
   isLoaded:false
 }
 
+export const simpleAction = () => {
+  return dispatch => {
+    console.log('hello')
+  }
+}
+
 export default (state = initialState, action) => {
   switch (action.type) {
    case LOAD:
@@ -20,8 +26,3 @@ export default (state = initialState, action) => {
  }
 
 
- export const simpleAction = () => {
-   return dispatch => {
-     console.log('hello')
-   }
- }

@@ -1,0 +1,1 @@
+export { default as sim } from './sim/simpleReducer'

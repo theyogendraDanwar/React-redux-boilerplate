@@ -1,26 +1,55 @@
-import React from 'react';
-import './App.css';
+import React from 'react'
+import {
+  NavLink,
+  Link,
+} from 'react-router-dom'
 
-function App(props) {
-  console.log(props);
+import RouteWithSubRoute from '../../utils/RouteWithSubRoute';
+
+export const Sandwiches = () => <h2>Sandwiches</h2>
+
+export const Tacos = ({ routes, routes2, ...props }) => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h2>Tacos</h2>
+      <ul>
+        {routes.map((route, index) => (
+          <li key={index}>
+            <NavLink key={index} to={route.path}>
+              {route.label}
+            </NavLink>
+          </li>
+        ))}
+      </ul>
+        {routes.map((route, index) => (
+          <RouteWithSubRoute key={index} {...route} />
+        ))}
     </div>
-  );
+  )
 }
 
-export default App;
+export const Bus = () => <h3>Bus</h3>
+export const DefaultTab = () => <h3>DefaultTab</h3>
+export const Cart = () => <h3>Cart</h3>
+
+class App extends React.Component {
+  render() {
+    const { routes } = this.props;
+    return (
+      <div>
+        <ul>
+          <li><Link to="/tacos/default">Tacos</Link></li>
+          <li><Link to="/sandwiches">Sandwiches</Link></li>
+        </ul>
+          {routes.map((route, index) => (
+            <RouteWithSubRoute key={index} {...route} />
+          ))}
+        <div className="second-section">
+          hello
+        </div>
+      </div>
+    )
+  }
+}
+
+export default App

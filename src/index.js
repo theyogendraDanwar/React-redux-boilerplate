@@ -1,21 +1,31 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux'
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import configureStore from './redux/store'; 
+import { Route, Switch } from 'react-router-dom'
+import { ConnectedRouter } from 'connected-react-router';
+import { createBrowserHistory } from 'history';
 import * as serviceWorker from './serviceWorker';
-import App from './containers/AppContainer'
+
+import configureStore from './redux/store';
+import RouteWithSubRoute from './utils/RouteWithSubRoute';
 import NotFound from './components/NotFound/NotFound'
+import { routes } from './routes'
+
 import './index.css';
 
+export const history = createBrowserHistory();
+
 ReactDOM.render(
-  <Provider store={configureStore()}>
-    <BrowserRouter>
+  <Provider store={configureStore(history)}>
+    <ConnectedRouter history={history}>
       <Switch>
-        <Route path="/" exact component={App} />
+        {routes.map((route) => (
+          <RouteWithSubRoute key={route.path} {...route} />
+        ))
+        }
         <Route component={NotFound} />
       </Switch>
-    </BrowserRouter>
+    </ConnectedRouter>
   </Provider>,
   document.getElementById('root'));
 

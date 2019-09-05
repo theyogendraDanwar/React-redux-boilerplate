@@ -1,7 +1,12 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
-import simpleReducer  from './ducks/simpleReducer';
+import { connectRouter } from 'connected-react-router'
+import * as reducers from './modules'
 
-const configureStore = () => createStore(combineReducers({ sim: simpleReducer }), applyMiddleware(thunk));
+const configureStore = (history) => createStore(
+  combineReducers({ 
+    ...reducers,
+    router: connectRouter(history) }), 
+  applyMiddleware(thunk));
 
 export default configureStore
