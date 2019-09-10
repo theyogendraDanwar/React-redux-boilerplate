@@ -8,21 +8,25 @@ const initialState = {
   isLoaded:false
 }
 
-export const simpleAction = () => {
-  return dispatch => {
-    console.log('hello')
-  }
-}
-
 export default (state = initialState, action) => {
   switch (action.type) {
    case LOAD:
     return {
-     result: action.payload
+      ...state,
+      isLoaded: action.payload
     }
    default:
     return state
   }
  }
+
+ export const simpleAction = () => {
+  return dispatch => {
+    dispatch({
+      type: LOAD,
+      payload: true,
+    })
+  }
+}
 
 
