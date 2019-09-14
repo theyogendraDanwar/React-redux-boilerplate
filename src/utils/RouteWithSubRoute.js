@@ -1,14 +1,15 @@
 import React from 'react'
-import { Route, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
+import { Route, Redirect, withRouter } from 'react-router-dom'
 
-const mapDispatchToState = (state) => ({
-  ...state
+const mapStateToProps = (state) => ({
+  login: state.login
 })
-const RouteWithSubRoute = (route, key) => {
+
+const RouteWithSubRoute = (props) => {
   const Inner = ({ component: Component, path, exact, login, restricted, ...props }) => {
-    if (login.isLoggedIn) {
-      return <Route path={path} exact={exact} key={key} render={(props) => (
+    if (login && login.isLoggedIn) {
+      return <Route path={path} exact={exact} render={(props) => (
         <Component {...props} />
       )} />;
     }
@@ -18,11 +19,11 @@ const RouteWithSubRoute = (route, key) => {
         state: { from: props.location }
       }} />;
     } else {
-      return <Route path={path} exact={exact} key={key} render={(props) => (
+      return <Route path={path} exact={exact} render={(props) => (
         <Component {...props} />
       )} />;
     }
   };
-  return <Inner {...route} />
+  return <Inner {...props} />
 }
-export default connect(mapDispatchToState)(RouteWithSubRoute);
+export default withRouter(connect(mapStateToProps)(RouteWithSubRoute));

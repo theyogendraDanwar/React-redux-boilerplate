@@ -1,11 +1,9 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import {
   Link,
 } from 'react-router-dom'
 
-export const Sandwiches = () => <h2>Sandwiches</h2>
-
-export const Tacos = ({ routes, routes2, ...props }) => {
+export const Tacos = ({ routes, ...props }) => {
   return (
     <div>
       <h2>Tacos</h2>
@@ -14,18 +12,13 @@ export const Tacos = ({ routes, routes2, ...props }) => {
     </div>
   )
 }
-
-export const Bus = () => <h3>Bus</h3>
-export const DefaultTab = () => <h3>DefaultTab</h3>
-export const Cart = () => <h3>Cart</h3>
-
 const App = ({routes,...props}) => {
-  console.log(props);
+useEffect(() => props.fetchData(),[])
   return (
     <div>
+      <button onClick={props.fetchData}>onClick</button>
       <ul>
-        <li><Link to="/tacos/default">Tacos</Link></li>
-        <li><Link to="/sandwiches">Sandwiches</Link></li>
+        <li><Link to="/homes">Tacos</Link></li>
       </ul>
       <div className="second-section">
         hello

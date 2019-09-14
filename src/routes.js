@@ -7,8 +7,9 @@ export const routes = [
     path: '/',
     component: App,
     exact: true,
+    restricted: true,
   }, {
-    path: '/home',
+    path: '/homes',
     component: Tacos,
     exact: true,
     restricted: true,
