@@ -1,9 +1,13 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import * as call from '../../utils/testUtils'
 import App from './App';
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<App />, div);
-  ReactDOM.unmountComponentAtNode(div);
-});
+describe('App Component', () => {
+  describe('renders without crashing with expected Props', () => {
+    test('renders without crashing', () => {
+      const wrapper = call.setup(App, {});
+      const appComponent = call.findByAttr(wrapper, '.app-container');
+      expect(appComponent.length).toBe(1);
+    });
+  });
+})
