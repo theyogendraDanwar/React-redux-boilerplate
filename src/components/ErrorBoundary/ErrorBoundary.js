@@ -15,7 +15,7 @@ class ErrorBoundary extends Component {
     const { showErrorText, children } = this.props
     const { err } = this.state
     return (
-      err ? <div className="error-section">Opps! {showErrorText}</div> : {...children}
+      err ? <div className="error-section">Opps! {showErrorText}</div> : { ...children }
     )
   }
 }
