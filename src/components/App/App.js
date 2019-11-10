@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, { useEffect } from 'react'
 import {
   Link,
 } from 'react-router-dom'
@@ -12,8 +12,8 @@ export const Tacos = ({ routes, ...props }) => {
     </div>
   )
 }
-const App = ({routes,...props}) => {
-useEffect(() => props.fetchData(),[])
+const App = ({ routes, ...props }) => {
+  useEffect(() => props.fetchData(), [])
   return (
     <div className="app-container">
       <button onClick={props.fetchData}>onClick</button>
